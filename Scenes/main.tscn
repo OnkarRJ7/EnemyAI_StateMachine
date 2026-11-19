@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bijy032t2fhc8"]
+
+[ext_resource type="PackedScene" uid="uid://38m81y6nbyyr" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://brvt8ny8vakpx" path="res://Scenes/enemy.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://cvl16jxs7kbfl" path="res://Scenes/enemy.gd" id="3_8gbba"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uj04i"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
+size = Vector3(30, 1, 30)
+
+[node name="Main" type="Node3D" unique_id=32812498]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1722791352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=470741445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005151391, 0.0016258955, -0.0012207031)
+mesh = SubResource("BoxMesh_uj04i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1555946098]
+shape = SubResource("BoxShape3D_uj04i")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=199946605]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+
+[node name="Main Camera" type="Camera3D" parent="." unique_id=1195659548]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 18, 22)
+
+[node name="Player" parent="." unique_id=731949490 instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
+
+[node name="Enemy" parent="." unique_id=1630863885 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+up_direction = Vector3(0.99227786, 0.12403473, 0)
+script = ExtResource("3_8gbba")
+
+[node name="Label3D" type="Label3D" parent="Enemy" unique_id=1886867909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
