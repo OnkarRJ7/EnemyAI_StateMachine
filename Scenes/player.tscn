@@ -4,7 +4,24 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj04i"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_player"]
+resource_local_to_scene = true
+albedo_color = Color(0.18, 0.55, 0.95, 1)
+roughness = 0.3
+metallic = 0.15
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uj04i"]
+material = SubResource("StandardMaterial3D_player")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_visor"]
+albedo_color = Color(0.1, 0.9, 1, 1)
+emission_enabled = true
+emission = Color(0.1, 0.9, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_visor"]
+material = SubResource("StandardMaterial3D_visor")
+size = Vector3(0.5, 0.2, 0.25)
 
 [node name="Player" type="CharacterBody3D" unique_id=731949490]
 script = ExtResource("1_v0iea")
@@ -14,3 +31,14 @@ shape = SubResource("CapsuleShape3D_uj04i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=411442652]
 mesh = SubResource("CapsuleMesh_uj04i")
+
+[node name="Visor" type="MeshInstance3D" parent="." unique_id=987123456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.42)
+mesh = SubResource("BoxMesh_visor")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=987123457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+billboard = 1
+text = "PLAYER (HP: 100)"
+font_size = 28
+outline_size = 6

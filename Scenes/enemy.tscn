@@ -1,13 +1,47 @@
 [gd_scene format=3 uid="uid://brvt8ny8vakpx"]
 
+[ext_resource type="Script" uid="uid://cvl16jxs7kbfl" path="res://Scenes/enemy.gd" id="1_4mvgq"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p5viw"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_enemy"]
+resource_local_to_scene = true
+albedo_color = Color(0.2, 0.75, 0.35, 1)
+roughness = 0.35
+emission_enabled = true
+emission = Color(0.1, 0.45, 0.18, 1)
+emission_energy_multiplier = 0.8
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uj04i"]
+material = SubResource("StandardMaterial3D_enemy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_visor"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.3, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0.1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_visor"]
+material = SubResource("StandardMaterial3D_visor")
+size = Vector3(0.5, 0.2, 0.25)
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1630863885]
+script = ExtResource("1_4mvgq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1917770744]
 shape = SubResource("CapsuleShape3D_p5viw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2067007679]
 mesh = SubResource("CapsuleMesh_uj04i")
+
+[node name="Visor" type="MeshInstance3D" parent="." unique_id=2067007680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.42)
+mesh = SubResource("BoxMesh_visor")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1886867909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+text = "[ PATROL ]"
+font_size = 32
+outline_size = 8
